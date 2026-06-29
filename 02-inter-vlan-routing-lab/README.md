@@ -4,6 +4,14 @@
 
 The objective of this lab is to allow communication between two separate VLANs using router-on-a-stick inter-VLAN routing.
 
+## Concepts Covered
+
+- VLANs
+- Trunk port
+- Router subinterfaces
+- Default gateway
+- Inter-VLAN routing
+
 ## Topology
 
 Devices used:
@@ -78,3 +86,34 @@ exit
 
 end
 write memory
+```
+##Router Configuration
+ ```bash
+enable
+configure terminal
+
+interface gigabitEthernet0/0
+no shutdown
+exit
+
+interface gigabitEthernet0/0.10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+
+interface gigabitEthernet0/0.20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+exit
+
+end
+write memory
+```
+
+##Verification Commands
+```bash
+show vlan brief
+show interfaces trunk
+show ip interface brief
+
+```
