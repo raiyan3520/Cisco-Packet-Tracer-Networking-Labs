@@ -87,7 +87,7 @@ exit
 end
 write memory
 ```
-##Router Configuration
+## Router Configuration
  ```bash
 enable
 configure terminal
@@ -110,10 +110,18 @@ end
 write memory
 ```
 
-##Verification Commands
+## Verification Commands
 ```bash
 show vlan brief
 show interfaces trunk
 show ip interface brief
 
 ```
+
+What I Learned
+VLANs separate one physical switch into multiple logical networks.
+Devices in different VLANs need routing to communicate.
+A trunk port carries traffic from multiple VLANs.
+Router-on-a-stick uses one physical router interface with multiple subinterfaces.
+Each router subinterface works as the default gateway for one VLAN.
+Inter-VLAN routing allows communication between different VLANs.
