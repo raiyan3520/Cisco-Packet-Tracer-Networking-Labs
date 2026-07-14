@@ -15,10 +15,12 @@ A foundational Cisco networking lab demonstrating how to establish communication
 ## Router Configurations
 
 ### Router 0 Configuration:
+![Router 0 Config](Router0_config.png)
 ![Router 0 Config](Router0_config1.png)
 
 ### Router 1 Configuration:
 ![Router 1 Config](Router1_config1.png)
+![Router 1 Config](Router1_config.png)
 
 ## Verification
 * Successful end-to-end ping execution from PC0 to PC2.
