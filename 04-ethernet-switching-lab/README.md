@@ -10,7 +10,7 @@ This lab demonstrates basic Ethernet switching and dynamic MAC address learning 
 - 4 PCs
 - Network: 192.168.1.0/24
 
-![Network Topology](topology.png)
+![Network Topology](topology.jpg)
 
 ## IP Addressing
 
