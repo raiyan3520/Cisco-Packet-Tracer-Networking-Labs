@@ -1,0 +1,140 @@
+# IPv4 Subnetting and Inter-LAN Routing Lab
+
+## Overview
+
+This Cisco Packet Tracer lab demonstrates IPv4 subnetting and communication between two separate LANs through a router.
+
+The `192.168.10.0/24` network was divided into `/26` subnets. Four PCs communicate through two switches and one router.
+
+## Network Topology
+
+![Network Topology](network-topology.jpg)
+
+### LAN 1
+
+- PC0
+- PC1
+- Switch0
+- Router0 interface G0/0
+
+### LAN 2
+
+- PC2
+- PC3
+- Switch1
+- Router0 interface G0/1
+
+## Devices Used
+
+- 1 Cisco 1941 router: **Router0**
+- 2 Cisco 2960 switches: **Switch0** and **Switch1**
+- 4 PCs: **PC0, PC1, PC2, and PC3**
+- Copper straight-through cables
+
+## Addressing Table
+
+| Device | Interface | IP address | Subnet mask | Default gateway |
+|---|---|---|---|---|
+| Router0 | G0/0 | 192.168.10.1 | 255.255.255.192 | N/A |
+| Router0 | G0/1 | 192.168.10.65 | 255.255.255.192 | N/A |
+| PC0 | FastEthernet0 | 192.168.10.10 | 255.255.255.192 | 192.168.10.1 |
+| PC1 | FastEthernet0 | 192.168.10.20 | 255.255.255.192 | 192.168.10.1 |
+| PC2 | FastEthernet0 | 192.168.10.70 | 255.255.255.192 | 192.168.10.65 |
+| PC3 | FastEthernet0 | 192.168.10.80 | 255.255.255.192 | 192.168.10.65 |
+
+## Subnet Information
+
+### LAN 1: 192.168.10.0/26
+
+- Network address: `192.168.10.0`
+- Usable range: `192.168.10.1` to `192.168.10.62`
+- Broadcast address: `192.168.10.63`
+- Usable hosts: 62
+
+### LAN 2: 192.168.10.64/26
+
+- Network address: `192.168.10.64`
+- Usable range: `192.168.10.65` to `192.168.10.126`
+- Broadcast address: `192.168.10.127`
+- Usable hosts: 62
+
+## Physical Connections
+
+| Source | Destination | Cable |
+|---|---|---|
+| PC0 | Switch0 | Copper straight-through |
+| PC1 | Switch0 | Copper straight-through |
+| Switch0 | Router0 G0/0 | Copper straight-through |
+| Router0 G0/1 | Switch1 | Copper straight-through |
+| Switch1 | PC2 | Copper straight-through |
+| Switch1 | PC3 | Copper straight-through |
+
+## Router Configuration
+
+```text
+enable
+configure terminal
+
+interface gigabitEthernet 0/0
+ip address 192.168.10.1 255.255.255.192
+no shutdown
+exit
+
+interface gigabitEthernet 0/1
+ip address 192.168.10.65 255.255.255.192
+no shutdown
+exit
+
+end
+write memory
+```
+
+## Verification
+
+### Router interface status
+
+The following command was used on Router0:
+
+```text
+show ip interface brief
+```
+
+Both router interfaces showed `up/up`, confirming that the connections were working.
+
+![Router Interface Status](router-interfaces.jpg)
+
+### Inter-LAN connectivity test
+
+PC0 belongs to the `192.168.10.0/26` subnet.
+
+PC2 belongs to the `192.168.10.64/26` subnet.
+
+The following command was run from PC0:
+
+```text
+ping 192.168.10.70
+```
+
+The successful ping confirms that PC0 can communicate with PC2 through Router0.
+
+![Successful Ping from PC0 to PC2](successful-ping.jpg)
+
+## Results
+
+The lab was completed successfully:
+
+- PC0 and PC1 can communicate within LAN 1.
+- PC2 and PC3 can communicate within LAN 2.
+- Router0 interfaces G0/0 and G0/1 are `up/up`.
+- Devices in LAN 1 can communicate with devices in LAN 2.
+- The `/26` subnet masks and default gateways work correctly.
+
+## Skills Practiced
+
+- IPv4 address assignment
+- `/26` subnet calculation
+- Default gateway configuration
+- Router interface configuration
+- Inter-LAN routing
+- Connectivity testing with `ping`
+- Interface verification using Cisco IOS commands
