@@ -14,7 +14,7 @@ The network uses:
 
 ## Topology
 
-![Network Topology](topology.png)
+![Network Topology](topology.jpg)
 
 ### Addressing Scheme
 
